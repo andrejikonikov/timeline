@@ -6,7 +6,7 @@ var homeClusters = [];
 var awayClusters = [];
 var homeMarkers = [];
 var awayMarkers = [];
-var markerSize = 0.5;
+var markerSize = 2;
 
 class Cluster {
 
@@ -62,7 +62,6 @@ var addCluster = function(marker, clusters){
 }
 
 var Hello = React.createClass({
-    displayName: 'Hello',
     period: 1,
     statics: {
         alertMessage: function () {
@@ -184,17 +183,17 @@ var TodoItems = React.createClass({
                     left: cluster._markers[0] + '%'
                 };
                 className = 'marker ' + 'away';
-                key= Date.now();
+                key= Date.now() + cluster._min;
 
                 return (
                     <div className={className} style={style} key={key}></div>
                 );
             } else {
                 style = {
-                    left: cluster._markers[0] + '%'
+                    left: cluster._min + ((cluster._max - cluster._min) / 2) + '%'
                 };
                 className = 'table ' + 'away';
-                key= Date.now();
+                key= Date.now() + cluster._min;
 
                 return (
                     <div className={className} style={style} key={key}>{cluster._markers.length}</div>
@@ -212,17 +211,17 @@ var TodoItems = React.createClass({
                     left: cluster._markers[0] + '%'
                 };
                 className = 'marker ' + 'home';
-                key= Date.now();
+                key= Date.now() + cluster._max;
 
                 return (
                     <div className={className} style={style} key={key}></div>
                 );
             } else {
                 style = {
-                    left: cluster._markers[0] + '%'
+                    left: cluster._min + ((cluster._max - cluster._min) / 2) + '%'
                 };
                 className = 'table ' + 'home';
-                key= Date.now();
+                key= Date.now() + cluster._max;
 
                 return (
                     <div className={className} style={style} key={key}>{cluster._markers.length}</div>
